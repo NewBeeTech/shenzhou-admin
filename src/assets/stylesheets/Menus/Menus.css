@@ -1,0 +1,38 @@
+
+.Menu {
+  background-color: #373e4c;
+  border: none;
+  color: white;
+}
+.icon {
+  margin-right: 8px;
+}
+
+.subTitle {
+  display: flex;
+  align-items: center;
+}
+.subTitle:hover {
+  svg path{
+      fill: #1372D8;
+  }
+}
+
+.MenusHeaderContainer {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+.sloganContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+  color: #fff;
+  .sloganTitle {
+    font-size: 1.6em;
+  }
+  .sloganSubtitle {
+    font-size: 1em;
+  }
+}

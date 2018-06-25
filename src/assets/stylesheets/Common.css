@@ -1,0 +1,208 @@
+@import "./_palette.css";
+
+.contentList{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 94vh;
+  box-sizing: border-box;
+  background-color: var(--backgroundColor);
+  position: relative;
+  top: 60px;
+}
+
+.contentListHeader{
+  flex-grow: 1;
+}
+
+.contentListContent{
+  overflow: scroll;
+  flex-grow: 40;
+  padding:3px 20px;
+}
+
+.contentListSearch{
+  margin-top: 40px;
+  padding: 1vh 0;
+  background: var(--WhiteColor);
+}
+
+.contentListTable{
+  padding: 1em;
+  margin-top: 2vh;
+  background: var(--WhiteColor);
+  table a{
+    color: var(--primaryColor);
+  }
+}
+
+.pageNav{
+  display: flex;
+  width: 100%;
+  padding: 1vh;
+  justify-content: flex-end;
+  background: var(--WhiteColor);
+}
+/*
+.statistics{
+  padding: 5px;
+  background: $white-color;
+  font-size: 15px;
+  margin-top: 2vh;
+  margin-bottom: -1vh;
+}
+
+.rowColor{
+  background: $input-border-color;
+}
+.contentOperate{
+  padding-top: 2vh;
+  padding-left: 1vw;
+}
+.fristView{
+  margin-bottom: 5px;
+}
+.noChatHistory{
+  margin-top: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+}
+
+.dragbar {
+   background-color: #efefef;
+   height:100%;
+   float: right;
+   width: 2px;
+   cursor: col-resize;
+ }
+.rmModal {
+  height: 70vh;
+	padding: 0 20px;
+  width: 100%;
+  background: #fff url("../../images/white_paperboard.jpg");
+}
+
+.headerText {
+  text-align: center;
+  background-color: #ccc;
+  margin: 0px 150px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}*/
+
+
+/* header */
+.contentHeader{
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  background: var(--WhiteColor);
+  flex-direction: row;
+  font-size: 2em;
+  border-bottom: 1px solid #bbbbbb;
+  width: calc(100% - 200px);
+  position: fixed;
+  top: 40px;
+  right: 0;
+  z-index: 1000;
+}
+
+.contentText{
+  flex-grow: 19;
+  margin-left: 20px;
+  margin-top: 10px;
+
+  .headerSubText{
+    margin-left: 2vw;
+  }
+}
+
+.contentButton{
+  flex-grow: 1;
+  position: relative;
+  right: 40px;
+  /*margin-top: 7px;*/
+}
+
+.changeButton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3px;
+  margin-right: 83px;
+  height: 28px;
+  width: 100px;
+  border-radius: 2px;
+  background: var(--primaryColor);
+  font-size: 1rem;
+  a {
+    color: white;
+  }
+  a:link {
+    color: white;
+    text-decoration: none;
+  }
+}
+.changeButton:hover {
+  background: #2db7f5;
+}
+
+.contentFont {
+  font-size: 1.8em;
+  font-family: '华文正楷';
+  color: #666;
+}
+
+.noCharts{
+  padding-top: 8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+}
+
+/* button style*/
+
+.blueButton{
+  width: 100px;
+  margin-bottom: 7px;
+  background-color: var(--primaryColor);
+  border-radius: 2px;
+  border:1px solid var(--primaryColor);
+}
+
+.greenButton{
+  width: 100px;
+  margin-bottom: 7px;
+  background-color: var(--greenColor);
+  border-radius: 2px;
+  border:1px solid var(--greenColor);
+}
+.greenButton:hover{
+  border:1px solid var(--greenSubColor);
+  background-color: var(--greenSubColor);
+}
+.whiteButton{
+  width: 100px;
+  margin-bottom: 7px;
+  border-radius: 1px;
+  border:1px solid var(--primaryColor);
+}
+
+.yellowButton{
+  width: 100px;
+  background-color: #FF7316;
+  border-radius: 2px;
+  border:1px solid #FF7316;
+}
+.yellowButton:hover{
+  border:1px solid #FFBD94;
+  background-color: #FFBD94;
+}
+.cancelButton{
+  width: 100px;
+  margin-bottom: 7px;
+  border-radius: 1px;
+}

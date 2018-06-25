@@ -1,0 +1,50 @@
+.user{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+}
+.TopBarContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 40px;
+  background-color: #585F67;
+  padding-right: 2vw;
+  position: fixed;
+  width: calc(100% - 200px);
+  top:0;
+  right: 0;
+  z-index: 1000;
+}
+
+.icon {
+  color: #FFFFFF;
+}
+
+.userName {
+  color: #fff;
+  margin: 0 7px;
+}
+.changeButton{
+  margin-right: 20px;
+  padding: 6px 18px;
+  height: 25px;
+  width: 100px;
+  border-radius: 2px;
+  background: #757982;
+  font-size: 1rem;
+  color: white;
+}
+.changeButton:link {
+  color: white;
+  text-decoration: none;
+}
+.changeButton:visited {
+  color: white;
+  text-decoration: none;
+}
+.changeButton:hover {
+  background: #CED6DC;
+  color: white;
+}

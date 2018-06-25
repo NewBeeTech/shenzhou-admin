@@ -1,0 +1,90 @@
+/*@import "../palette.css";*/
+
+.login{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.loginHeader{
+  background: #585F67;
+  width: 100%;
+  flex-grow: 1;
+}
+.loginFooter{
+  width: 100%;
+  flex-grow: 10;
+}
+
+.slogan {
+  display: flex;
+  margin-top: 1vh;
+  justify-content: center;
+  color: #1372d8;
+}
+.loginForm{
+  width: 100%;
+  flex-grow: 9;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background: #EFF3F6;
+}
+.loginForm2{
+  margin-top: 10vh;
+}
+.myForm{
+  display: flex;
+  margin: 10vh auto;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  height: 400px;
+  width: 640px;
+  background: #FFFFFF;
+}
+.formTitle{
+  display: flex;
+  font-weight: bold;
+  width: 100%;
+  color: #222632;
+  /* font-size: 2em; */
+  align-content: center;
+  justify-content: center;
+  margin-top: 1vh;
+}
+.loginButton{
+  width: 100%;
+  margin-top: -3vh;
+  background: #1372D8;
+  border-radius: 0px;
+  &:hover,:active{
+    background: #0080FF;
+  }
+}
+
+.forget{
+  width: 100%;
+  color: #1372D8;
+  margin-top: -2vh;
+  text-align: right;
+}
+.remark{
+  color: #FF7316;
+}
+
+.loginHeader{
+  width: 100vw;
+  background: #585F67;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  /*padding: 1vh 5vw;*/
+}
+
+.headerSlogan {
+  color: #FFFFFF;
+  font-size: 2em;
+}

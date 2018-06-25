@@ -1,0 +1,23 @@
+/**
+ * Created by leiyouwho on 11/4/2016.
+ */
+
+.RootContainer {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.rightContainer {
+  flex-grow: 11;
+  overflow-y: scroll;
+}
+.rightTopBar{
+
+  height: 40px;
+}
+.menuContainer {
+  background-color: #404040;
+  width: 200px;
+  flex-shrink: 0;
+}
