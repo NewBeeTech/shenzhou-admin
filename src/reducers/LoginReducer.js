@@ -22,12 +22,6 @@ const defaultState = Immutable.Map({
   login: false,
   supportList: Immutable.Map({
     list: Immutable.List([
-      Immutable.Map({
-        id: 1,
-      }),
-      Immutable.Map({
-        id: 2,
-      }),
     ]),
     total: 0,
     currentPage: 1,
@@ -55,6 +49,13 @@ const getLoginHandler = new ActionHandler.handleAction(LoginAction.GET_LOGIN)
     return state.set('login', false)
       .set('isFetching', false).set('errMsg', action.errMsg);
   });
+
+  const getSupportListHandler = new ActionHandler.handleAction(LoginAction.GET_SUPPORT_LIST)
+    .success((state, action) => {
+      return state.setIn(['supportList', 'list'], Immutable.fromJS(action.data.list))
+        .setIn(['supportList', 'total'], Immutable.fromJS(action.data.totalRow))
+        .set('isFetching', false).set('errMsg', '');
+    });
 //
 // const getLogoutHandler = new ActionHandler.handleAction(LoginAction.GET_LOGOUT)
 //   .request((state) => {
@@ -70,7 +71,7 @@ const getLoginHandler = new ActionHandler.handleAction(LoginAction.GET_LOGIN)
 //   });
 
 export default ActionHandler.handleActions(
-  [getLoginHandler],
+  [getLoginHandler, getSupportListHandler],
   defaultState,
   /^LoginReducer\//
 );

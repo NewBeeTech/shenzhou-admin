@@ -15,4 +15,4 @@ if (process.env.APIURL) {
 export const LoginPath: string = `${rootURL}admin/login`;
 
 // 列表
-export const getListPath: string = `${rootURL}admin/list`;
+export const getSupportListPath: string = `${rootURL}admin/list`;

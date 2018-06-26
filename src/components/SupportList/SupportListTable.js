@@ -13,30 +13,29 @@ class UserListTable extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.columns = [{
-      title: '操作',
-      dataIndex: 'operation',
-      key: 'operation',
-      width: 100,
-    }, {
-      title: '用户ID',
+      title: 'ID',
       dataIndex: 'id',
       key: 'id',
     }, {
       title: '用户昵称',
-      dataIndex: 'nickName',
-      key: 'nickName',
+      dataIndex: 'name',
+      key: 'name',
     }, {
-      title: '用户手机号',
-      dataIndex: 'phone',
-      key: 'phone',
+      title: '邮箱',
+      dataIndex: 'email',
+      key: 'email',
     }, {
-      title: '认证技能',
-      dataIndex: 'skills',
-      key: 'skills',
+      title: '标题',
+      dataIndex: 'title',
+      key: 'title',
     }, {
-      title: '抽成比例',
-      dataIndex: 'percentage',
-      key: 'percentage',
+      title: '描述',
+      dataIndex: 'desc',
+      key: 'desc',
+    }, {
+      title: '提交时间',
+      dataIndex: 'createTime',
+      key: 'createTime',
     }];
   }
   _renderDataSource(datas) {
@@ -46,6 +45,11 @@ class UserListTable extends React.Component {
       dataSource.push({
         key: index,
         id: data.get('id'),
+        name: data.get('name'),
+        email: data.get('email'),
+        title: data.get('title'),
+        desc: data.get('desc'),
+        createTime: data.get('createTime'),
       });
     });
     }

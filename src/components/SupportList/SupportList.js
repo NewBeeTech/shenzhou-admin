@@ -14,13 +14,12 @@ import amumu from 'amumu';
 @amumu.decorators.Loading('pc')
 class SupportList extends React.Component {
   componentWillMount() {
-    // this.props.dispatch(UserAction.getUserList(this.props.searchData.toJS()));
-    // this.props.dispatch(SkillAction.getSearchSkillList());
+    this.props.dispatch(LoginAction.getSupportList(this.props.searchData.toJS()));
   }
   _searchAction = (dispatch: Function) => (params: {}, current = 1) => {
-    // const localParams = Object.assign(params, { pageNum: current, pageSize: this.props.searchData.get('pageSize') });
-    // dispatch(UserAction.getUserList(localParams));
-    // this.props.changeAction('UserReducer/searchData/pageNum', current);
+    const localParams = Object.assign(params, { pageNum: current, pageSize: this.props.searchData.get('pageSize') });
+    dispatch(LoginAction.getSupportList(localParams));
+    this.props.changeAction('LoginReducer/searchData/pageNum', current);
   };
   render() {
     return (
