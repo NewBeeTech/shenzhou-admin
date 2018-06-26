@@ -55,22 +55,22 @@ const getLoginHandler = new ActionHandler.handleAction(LoginAction.GET_LOGIN)
     return state.set('login', false)
       .set('isFetching', false).set('errMsg', action.errMsg);
   });
-
-const getLogoutHandler = new ActionHandler.handleAction(LoginAction.GET_LOGOUT)
-  .request((state) => {
-    return state.set('isFetching', true).set('errMsg', '');
-  }).success((state, action) => {
-    userInfoStorage.removeItem('role');
-    userInfoStorage.removeItem('id');
-    userInfoStorage.removeItem('userName');
-    return Immutable.fromJS(action.data).set('login', false)
-  }).failure((state, action) => {
-    return state.set('login', true)
-      .set('isFetching', false).set('errMsg', action.errMsg);
-  });
+//
+// const getLogoutHandler = new ActionHandler.handleAction(LoginAction.GET_LOGOUT)
+//   .request((state) => {
+//     return state.set('isFetching', true).set('errMsg', '');
+//   }).success((state, action) => {
+//     userInfoStorage.removeItem('role');
+//     userInfoStorage.removeItem('id');
+//     userInfoStorage.removeItem('userName');
+//     return Immutable.fromJS(action.data).set('login', false)
+//   }).failure((state, action) => {
+//     return state.set('login', true)
+//       .set('isFetching', false).set('errMsg', action.errMsg);
+//   });
 
 export default ActionHandler.handleActions(
-  [getLoginHandler, getLogoutHandler],
+  [getLoginHandler],
   defaultState,
   /^LoginReducer\//
 );

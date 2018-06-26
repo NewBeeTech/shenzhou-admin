@@ -19,9 +19,9 @@ class LoginForm extends React.PureComponent {
       if (!!err) {
         return false;
       } else {
-        const password = this.props.form.getFieldsValue().password;
+        const passWord = this.props.form.getFieldsValue().password;
         const userName = this.props.form.getFieldsValue().userName;
-        this.props.loginAction({userName, passWord: password});
+        this.props.loginAction({userName, passWord});
       }
     });
 

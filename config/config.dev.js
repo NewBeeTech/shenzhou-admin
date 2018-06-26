@@ -1,4 +1,4 @@
-const APIURL = 'http://sittemp.xiguawang.com.cn';
+const APIURL = 'http://118.190.158.183:8080';
 // const APIURL = 'http://xiguawang.com.cn';
 module.exports = {
   host: '0.0.0.0',

@@ -225,13 +225,13 @@ module.exports = {
       '/api/*': {
         changeOrigin: true,
         // target:  'http://xiguawang.com.cn',
-        target: 'http://sittemp.xiguawang.com.cn',
+        target: 'http://118.190.158.183:8080',
         secure: false
       },
       '/oss/*': {
         changeOrigin: true,
         // target:  'http://xiguawang.com.cn',
-        target: 'http://sittemp.xiguawang.com.cn',
+        target: 'http://118.190.158.183:8080',
         secure: false
       }
     },
