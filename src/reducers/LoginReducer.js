@@ -30,6 +30,29 @@ const defaultState = Immutable.Map({
     pageNum: 1,
     pageSize: 10,
   }),
+  dynamicList: Immutable.Map({
+    list: Immutable.List([
+      Immutable.Map({
+        id: 1,
+        title: 'title',
+        createTime: 'dsfsf'
+      }),
+      Immutable.Map({
+        id: 2,
+        title:'title',
+        createTime: 'dsfsf'
+      })
+    ]),
+    total: 0,
+    currentPage: 1,
+  }),
+  dynamicSearchData: Immutable.Map({
+    pageNum: 1,
+    pageSize: 10,
+  }),
+  dynamicInfo: Immutable.Map({
+    
+  }),
 });
 
 const getLoginHandler = new ActionHandler.handleAction(LoginAction.GET_LOGIN)
@@ -56,22 +79,23 @@ const getLoginHandler = new ActionHandler.handleAction(LoginAction.GET_LOGIN)
         .setIn(['supportList', 'total'], Immutable.fromJS(action.data.totalRow))
         .set('isFetching', false).set('errMsg', '');
     });
-//
-// const getLogoutHandler = new ActionHandler.handleAction(LoginAction.GET_LOGOUT)
-//   .request((state) => {
-//     return state.set('isFetching', true).set('errMsg', '');
-//   }).success((state, action) => {
-//     userInfoStorage.removeItem('role');
-//     userInfoStorage.removeItem('id');
-//     userInfoStorage.removeItem('userName');
-//     return Immutable.fromJS(action.data).set('login', false)
-//   }).failure((state, action) => {
-//     return state.set('login', true)
-//       .set('isFetching', false).set('errMsg', action.errMsg);
-//   });
+
+
+    const getDynamicListHandler = new ActionHandler.handleAction(LoginAction.GET_DYNAMIC_LIST)
+    .success((state, action) => {
+      return state.setIn(['dynamicList', 'list'], Immutable.fromJS(action.data.list))
+        .setIn(['dynamicList', 'total'], Immutable.fromJS(action.data.totalRow))
+        .set('isFetching', false).set('errMsg', '');
+    });
+
+    const getDynamicInfoHandler = new ActionHandler.handleAction(LoginAction.GET_DYNAMIC_INFO)
+    .success((state, action) => {
+      return state.set('dynamicInfo', Immutable.fromJS(action.data))
+        .set('isFetching', false).set('errMsg', '');
+    });
 
 export default ActionHandler.handleActions(
-  [getLoginHandler, getSupportListHandler],
+  [getLoginHandler, getSupportListHandler, getDynamicListHandler, getDynamicInfoHandler],
   defaultState,
   /^LoginReducer\//
 );

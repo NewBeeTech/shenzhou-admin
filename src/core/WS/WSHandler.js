@@ -100,76 +100,76 @@ export const GETURL = (path: string, params : Object = {}) => {
   const RequestURL = `${path}?${_param(paramsWithToken)}`;
   return RequestURL;
 };
-//
-// export const Upload = (baseURL, params, filename, file) => new Promise((resolve, reject) => {
-//   if (typeof XMLHttpRequest === 'undefined') {
-//     return;
-//   }
-//   const xhr = new XMLHttpRequest();
-//   const formData = new FormData();
-//   if (params) {
-//     Object.keys(params).map(key => {
-//       formData.append(key, params[key]);
-//       return key;
-//     });
-//   }
-//   formData.append('file', file);
-//   xhr.onload = () => {
-//   };
-//
-//   xhr.open('post', baseURL, true);
-//
-//   if (xhr.upload) {
-//      // 上传进度
-//     xhr.upload.onprogress = (e) => {
-//       if (e.total > 0) {
-//         e.percent = Math.round(e.loaded / e.total * 100 );
-//       }
-//     };
-//   }
-//   xhr.onreadystatechange = () => {
-//     if (xhr.readyState === 4) {
-//       if (xhr.status === 200) {
-//         resolve(xhr.responseText);
-//       } else {
-//         resolve('');
-//       }
-//     }
-//   };
-//   const headers = params.headers || {};
-//   for (const h in headers) {
-//     if (headers.hasOwnProperty(h) && headers[h] !== null) {
-//       xhr.setRequestHeader(h, headers[h]);
-//     }
-//   }
-//   xhr.send(formData);
-// });
-//
-//
-// export const UploadFileToOSS = async (params = {}) => {
-//   let signature = await GET(URL.GetOSSSignature, params);
-//   signature = signature.data;
-//   let localName = `${random_string(6)}-${params.filename}`;
-//   if(params.uploadType === 'update') {
-//     localName = params.filename;
-//   }
-//   let fileURL = `${signature.host}/${signature.dir}${localName}`;
-//   fileURL = encodeURI(fileURL);
-//
-//   const uploadParams = {
-//     name: params.filename,
-//     key: `${signature.dir}${localName}`,
-//     policy: signature.policy,
-//     OSSAccessKeyId: signature.accessid,
-//     success_action_status: '200',
-//     signature: signature.signature,
-//   };
-//   const uploadResult = await Upload(signature.host, uploadParams, localName, params.file);
-//
-//   const result = {
-//     filename: params.filename,
-//     fileURL,
-//   };
-//   console.log(result);
-//   return result;
-// };
+
+export const Upload = (baseURL, params, filename, file) => new Promise((resolve, reject) => {
+  if (typeof XMLHttpRequest === 'undefined') {
+    return;
+  }
+  const xhr = new XMLHttpRequest();
+  const formData = new FormData();
+  if (params) {
+    Object.keys(params).map(key => {
+      formData.append(key, params[key]);
+      return key;
+    });
+  }
+  formData.append('file', file);
+  xhr.onload = () => {
+  };
+
+  xhr.open('post', baseURL, true);
+
+  if (xhr.upload) {
+     // 上传进度
+    xhr.upload.onprogress = (e) => {
+      if (e.total > 0) {
+        e.percent = Math.round(e.loaded / e.total * 100 );
+      }
+    };
+  }
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        resolve(xhr.responseText);
+      } else {
+        resolve('');
+      }
+    }
+  };
+  const headers = params.headers || {};
+  for (const h in headers) {
+    if (headers.hasOwnProperty(h) && headers[h] !== null) {
+      xhr.setRequestHeader(h, headers[h]);
+    }
+  }
+  xhr.send(formData);
+});
+
+
+export const UploadFileToOSS = async (params = {}) => {
+  let signature = await GET(URL.GetOSSSignature, params);
+  signature = signature.data;
+  let localName = `${random_string(6)}-${params.filename}`;
+  if(params.uploadType === 'update') {
+    localName = params.filename;
+  }
+  let fileURL = `${signature.host}/${signature.dir}${localName}`;
+  fileURL = encodeURI(fileURL);
+
+  const uploadParams = {
+    name: params.filename,
+    key: `${signature.dir}${localName}`,
+    policy: signature.policy,
+    OSSAccessKeyId: signature.accessid,
+    success_action_status: '200',
+    signature: signature.signature,
+  };
+  const uploadResult = await Upload(signature.host, uploadParams, localName, params.file);
+
+  const result = {
+    filename: params.filename,
+    fileURL,
+  };
+  console.log(result);
+  return result;
+};

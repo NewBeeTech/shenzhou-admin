@@ -23,6 +23,8 @@ class Menus extends React.PureComponent {
     });
     if (e.key === '技术支持') {
       this.props.dispatch(push(RoutingURL.SupportList()));
+    } else if (e.key === '公告列表') {
+      this.props.dispatch(push(RoutingURL.DynamicList()));
     }
   }
   render() {
@@ -40,6 +42,11 @@ class Menus extends React.PureComponent {
                 key="技术支持"
               >
                 技术支持
+              </Item>
+              <Item
+                key="公告列表"
+              >
+                公告列表
               </Item>
             </Menu>
         </div>

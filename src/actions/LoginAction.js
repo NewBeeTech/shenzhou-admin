@@ -54,3 +54,112 @@ export const getSupportList = (params: Object) => (dispatch) => {
 //     console.warn('登录 -> 网络请求失败 ', err);
 //   });
 // };
+
+// 获取列表
+export const GET_DYNAMIC_LIST = 'GET_DYNAMIC_LIST';
+export const getDynamicList = (params: Object) => (dispatch) => {
+  const param = {
+    // entity: 'leave_msg',
+    // order: 'id',
+    // sort: 'desc'
+  }
+  const localParams = Object.assign(params, param);
+  const result = GET(URL.getSupportListPath, localParams);
+  AsyncFetchHandler(GET_DYNAMIC_LIST, result, dispatch);
+};
+
+// 获取详情
+export const GET_DYNAMIC_INFO = 'GET_DYNAMIC_INFO';
+export const getDynamicInfo = (params: Object) => (dispatch) => {
+  dispatch({
+    type: GET_DYNAMIC_INFO,
+    data: params,
+  });
+};
+
+// 保存
+export const ADD_DYNAMIC = 'ADD_DYNAMIC';
+export const addDynamic = (params: Object) => (dispatch) => {
+  const result = POSTJSON(URL.addDynamicPath, params);
+  AsyncFetchHandler(
+    ADD_DYNAMIC,
+    result,
+    dispatch
+  );
+  result.then(data => {
+    if (data.code === '200') {
+      NotificationCenter.NotificationCard(
+        '保存成功',
+        '',
+        'success',
+        2,
+      );
+      dispatch(push(RoutingURL.DynamicList()));
+    } else {
+      NotificationCenter.NotificationCard(
+        '保存失败',
+        '请填写正确的题目信息',
+        'error',
+        3,
+      );
+    }
+  });
+};
+
+// 修改
+export const UPDATE_DYNAMIC = 'UPDATE_DYNAMIC';
+export const updateDynamic = (params: Object) => (dispatch) => {
+  const result = POSTJSON(URL.updateDynamicPath, params);
+  AsyncFetchHandler(
+    UPDATE_DYNAMIC,
+    result,
+    dispatch
+  );
+  result.then(data => {
+    if (data.code === '200') {
+      NotificationCenter.NotificationCard(
+        '保存成功',
+        '',
+        'success',
+        2,
+      );
+      dispatch(push(RoutingURL.DynamicList()));
+    } else {
+      NotificationCenter.NotificationCard(
+        '保存失败',
+        '请填写正确的题目信息',
+        'error',
+        3,
+      );
+    }
+  });
+};
+// 删除
+export const DEL_DYNAMIC = 'DEL_DYNAMIC';
+export const delDynamic = (params: Object) => (dispatch) => {
+  const result = GET(URL.delDynamicPath, { id: params.deleteId });
+  AsyncFetchHandler(
+    DEL_DYNAMIC,
+    result,
+    dispatch
+  );
+  result.then(data => {
+    if (data.code === '200') {
+      NotificationCenter.NotificationCard(
+        '删除成功',
+        '',
+        'success',
+        2,
+      );
+      dispatch(getDynamicList(params));
+    } else {
+      NotificationCenter.NotificationCard(
+        '删除失败',
+        data.message,
+        'error',
+        3,
+      );
+    }
+  });
+};
+
