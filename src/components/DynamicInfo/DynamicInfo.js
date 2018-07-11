@@ -3,7 +3,6 @@ import DynamicInfoHeader from './DynamicInfoHeader';
 import Immutable from 'immutable';
 import * as Contentstyles from '../../assets/stylesheets/FromContent.css';
 import * as styles from './style.css';
-// import * as ArticleAction from '../../actions/ArticleAction';
 import * as LoginAction from '../../actions/LoginAction';
 import { push } from 'react-router-redux';
 import * as RoutingURL from '../../core/RoutingURL/RoutingURL';
@@ -72,10 +71,11 @@ class DynamicInfo extends React.Component {
     dispatch(push(RoutingURL.DynamicInfo(id, true)));
   }
   _updateAction = (dispatch) => (params: {}) => {
-    // const param = this.props.dynamicInfo.toJS();
-    // this.props.dispatch(ExperienceAction.dynamicInfo(param));
+    console.log('params:', params)
+    // const param = this.props.experienceInfo.toJS();
+    // this.props.dispatch(LoginAction.updateExperienceInfo(param));
     const id = this.props.experienceInfo.get('id');
-    const contentOss = this.props.experienceInfo.get('contentOss');
+    const contentOss = this.props.dynamicInfo.get('contentOss');
     const filename = id ? contentOss && contentOss.split('.json')[0].split('/')[contentOss.split('.json')[0].split('/').length-1] : 'contentOss.json';
     var content = this.props.form.getFieldValue('content');
     var blob = new Blob([JSON.stringify(content)], {type: "application/json;charset=utf-8"});
@@ -88,10 +88,10 @@ class DynamicInfo extends React.Component {
     result.then(fileInfo => {
       if (fileInfo.fileURL) {
         this.props.changeAction('LoginReducer/dynamicInfo/contentOss', fileInfo.fileURL);
-        this.props.form.setFields({contentOss: fileInfo.fileURL});
+        this.props.form.setFieldsValue({contentOss: fileInfo.fileURL});
         const params = this.props.dynamicInfo.toJS();
         delete params['content'];
-        params.style = 2;
+        params.style = 1;
         // this.props.dispatch(ExperienceAction.updateExperienceInfo(params));
       } else {
         // 上传失败的图片显示
@@ -121,7 +121,7 @@ class DynamicInfo extends React.Component {
           // console.log('上传成功');
           getBase64(file, (imgURL) =>
           this.setState({headImg: imgURL}));
-          this.props.changeAction('ExperienceReducer/dynamicInfo/headImg', fileInfo.fileURL);
+          this.props.changeAction('LoginReducer/dynamicInfo/headImg', fileInfo.fileURL);
         } else {
           // 上传失败的图片显示
           console.log('上传失败');
@@ -141,12 +141,12 @@ class DynamicInfo extends React.Component {
           // console.log('上传成功');
           // getBase64(file, (imgURL) => {
           //   content[index].content = imgURL;
-          //   this.props.form.setFields({
+          //   this.props.form.setFieldsValue({
           //     content,
           //   });
           // })
           content[index].content = fileInfo.fileURL;
-           this.props.form.setFields({
+           this.props.form.setFieldsValue({
              content,
            });
         } else {
@@ -187,7 +187,7 @@ class DynamicInfo extends React.Component {
    }
 
    // can use data-binding to set
-   form.setFields({
+   form.setFieldsValue({
      content: content.filter(key => key !== k),
    });
   };
@@ -202,7 +202,7 @@ class DynamicInfo extends React.Component {
     // can use data-binding to set
     // important! notify form to detect changes
     console.log(content);
-    form.setFields({
+    form.setFieldsValue({
       content,
     });
   };
@@ -211,7 +211,6 @@ class DynamicInfo extends React.Component {
       return(<Input.TextArea
         autosize={{ minRows: 6 }}
         type="textarea"
-        
         placeholder="输入正文"
         style={{ width: '95%', marginRight: 12 }}
       />);
@@ -284,7 +283,7 @@ class DynamicInfo extends React.Component {
                   if(item.type == 1 || item.type == 2) {
                     try {
                       content[index].content = e.target.value;
-                      this.props.form.setFields({
+                      this.props.form.setFieldsValue({
                         content,
                       });
                     } catch(e) {
@@ -322,7 +321,7 @@ class DynamicInfo extends React.Component {
             goUpdateAction={this._goUpdateAction(this.props.dispatch)}
             updateAction={this._updateAction(this.props.dispatch)}
             // params={this.props.articleInfo.toJS()}
-            params={{ ...this.props.form.getFieldsValue(), style: 2 }}
+            params={{ ...this.props.form.getFieldsValue(), style: 1 }}
           />
         </div>
         <div className={ Contentstyles.contentContainer }>
@@ -360,29 +359,6 @@ class DynamicInfo extends React.Component {
             <div className={ Contentstyles.formContent } >
               <FormItem
                 {...formItemLayout}
-                label="所属栏目"
-                hasFeedback
-              >
-                {getFieldDecorator('type', {
-                  initialValue: this.props.dynamicInfo.get('type'),
-                  rules: [{
-                    required: true,
-                    message: '请选择真题/教材同步',
-                  }],
-                  onChange: (e) => {
-                    this.props.changeAction(
-                    'ExperienceReducer/dynamicInfo/type', e);
-                  },
-                  })(
-                  <Select placeholder="请选择">
-                      <Option value={5}>考试大纲</Option>
-                      <Option value={6}>备考攻略</Option>
-                  </Select>
-                )}
-              </FormItem>
-              {/* <View className={ Contentstyles.formContent }> */}
-              <FormItem
-                {...formItemLayout}
                 label="头图(750*360)"
               >
                 {getFieldDecorator('headImg', {
@@ -414,7 +390,7 @@ class DynamicInfo extends React.Component {
                   initialValue: this.props.dynamicInfo.get('title'),
                   onChange: (e) => {
                     this.props.changeAction(
-                    'ExperienceReducer/dynamicInfo/title', e.target.value);
+                    'LoginReducer/dynamicInfo/title', e.target.value);
                   },
                   })(
                     <Input

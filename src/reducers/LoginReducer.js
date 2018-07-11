@@ -94,8 +94,14 @@ const getLoginHandler = new ActionHandler.handleAction(LoginAction.GET_LOGIN)
         .set('isFetching', false).set('errMsg', '');
     });
 
+    const getDynamicInfoContentHandler = new ActionHandler.handleAction(LoginAction.GET_DYNAMICCONTENT)
+    .success((state, action) => {
+      return state.setIn(['dynamicInfo', 'content'], Immutable.fromJS(action.data))
+        .set('isFetching', false).set('errMsg', '');
+      });
+
 export default ActionHandler.handleActions(
-  [getLoginHandler, getSupportListHandler, getDynamicListHandler, getDynamicInfoHandler],
+  [getLoginHandler, getSupportListHandler, getDynamicListHandler, getDynamicInfoHandler, getDynamicInfoContentHandler],
   defaultState,
   /^LoginReducer\//
 );

@@ -14,7 +14,7 @@ import amumu from 'amumu';
 @amumu.decorators.Loading('pc')
 class SupportList extends React.Component {
   componentWillMount() {
-    this.props.dispatch(LoginAction.getSupportList(this.props.searchData.toJS()));
+    this.props.dispatch(LoginAction.getSupportList({ pageNum: 1, pageSize: 10 }));
   }
   _searchAction = (dispatch: Function) => (params: {}, current = 1) => {
     const localParams = Object.assign(params, { pageNum: current, pageSize: this.props.searchData.get('pageSize') });

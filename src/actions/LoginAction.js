@@ -163,3 +163,31 @@ export const delDynamic = (params: Object) => (dispatch) => {
   });
 };
 
+
+
+export const GET_DYNAMICCONTENT = 'GET_DYNAMICCONTENT';
+export const getDynamicConetnt = (params) => (dispatch) => {
+  dispatch({
+    type: 'GET_DYNAMICCONTENT',
+  });
+  const result = fetch(params.url, {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    }
+  }).then(data => {
+      if(data.ok) {
+        data.json().then(result => {
+          dispatch({
+            type: 'GET_DYNAMICCONTENT_SUCCESS',
+            data: result,
+          });
+        })
+      } else {
+        dispatch({
+          type: 'GET_DYNAMICCONTENT_FAILURE',
+        });
+      }
+    }, (err) => console.log(err));
+};
