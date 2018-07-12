@@ -6,9 +6,9 @@ var ENV = process.env.APPENV;
 
 var client = new OSS({
   region: 'oss-cn-beijing',
-  accessKeyId: 'LTAItNo7dzxDTKX0',
-  accessKeySecret: 'fTbGpaeN3KujuD3cNiCfSzz1O0rJR5',
-  bucket: 'jianghu2017'
+  accessKeyId: 'LTAIVYqorIg12D6T',
+  accessKeySecret: '0C7is8k5aUpvKD4IT0HB5sQSWNZcqU',
+  bucket: 'shenzhoukeji'
 });
 
 fs.readdir(path.resolve(__dirname, '..', 'dist'), function(err, files) {
