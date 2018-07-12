@@ -53,7 +53,7 @@ export const modifyButton = (actionName: Function) => (params: Object) => {
       type="primary"
       onClick={() => actionName(params)}
     >
-      修改
+      保存
     </Button>
   );
 };
