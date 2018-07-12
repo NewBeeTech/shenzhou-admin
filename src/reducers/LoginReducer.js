@@ -59,15 +59,15 @@ const getLoginHandler = new ActionHandler.handleAction(LoginAction.GET_LOGIN)
   .request((state) => {
     return state.set('isFetching', true).set('errMsg', '');
   }).success((state, action) => {
-    userInfoStorage.setItem('role', action.data.role);
+    // userInfoStorage.setItem('role', action.data.role);
     userInfoStorage.setItem('id', action.data.id);
-    userInfoStorage.setItem('userName', action.data.userName);
-    return Immutable.fromJS(action.data).set('login', true)
-      .set('isFetching', false)
-      .set('id', action.data.id)
-      .set('userName', action.data.userName)
-      .set('role', action.data.role)
-      .set('errMsg', '');
+    // userInfoStorage.setItem('userName', action.data.userName);
+    // return Immutable.fromJS(action.data).set('login', true)
+    //   .set('isFetching', false)
+    //   .set('id', action.data.id)
+    //   .set('userName', action.data.userName)
+    //   .set('role', action.data.role)
+    //   .set('errMsg', '');
   }).failure((state, action) => {
     return state.set('login', false)
       .set('isFetching', false).set('errMsg', action.errMsg);
@@ -91,6 +91,7 @@ const getLoginHandler = new ActionHandler.handleAction(LoginAction.GET_LOGIN)
     const getDynamicInfoHandler = new ActionHandler.handleAction(LoginAction.GET_DYNAMIC_INFO)
     .success((state, action) => {
       return state.set('dynamicInfo', Immutable.fromJS(action.data))
+        .setIn(['dynamicInfo', 'content'], Immutable.fromJS(action.data.toJS().content && JSON.parse(action.data.toJS().content)))
         .set('isFetching', false).set('errMsg', '');
     });
 

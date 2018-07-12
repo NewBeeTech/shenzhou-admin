@@ -38,7 +38,7 @@ class DynamicInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      headImg: '',
+      img: '',
     };
   }
   componentWillMount() {
@@ -52,11 +52,11 @@ class DynamicInfo extends React.Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    if(this.props.dynamicInfo.get('headImg') !== nextProps.dynamicInfo.get('headImg') && nextProps.dynamicInfo.get('headImg')) {
+    if(this.props.dynamicInfo.get('img') !== nextProps.dynamicInfo.get('img') && nextProps.dynamicInfo.get('img')) {
       this.setState({
-        headImg: nextProps.dynamicInfo.get('headImg'),
+        img: nextProps.dynamicInfo.get('img'),
       });
-      console.log(nextProps.dynamicInfo.get('headImg'))
+      // console.log(nextProps.dynamicInfo.get('img'))
     }
   }
   /**
@@ -72,32 +72,22 @@ class DynamicInfo extends React.Component {
   }
   _updateAction = (dispatch) => (params: {}) => {
     console.log('params:', params)
-    // const param = this.props.experienceInfo.toJS();
-    // this.props.dispatch(LoginAction.updateExperienceInfo(param));
-    const id = this.props.experienceInfo.get('id');
-    const contentOss = this.props.dynamicInfo.get('contentOss');
-    const filename = id ? contentOss && contentOss.split('.json')[0].split('/')[contentOss.split('.json')[0].split('/').length-1] : 'contentOss.json';
-    var content = this.props.form.getFieldValue('content');
-    var blob = new Blob([JSON.stringify(content)], {type: "application/json;charset=utf-8"});
-    // FileSaver.saveAs(blob, "contentOss.json"); //saveAs(blob,filename)
-    const result = UploadFileToOSS({
-      filename,
-      uploadType: id ? 'update' : '',
-      file: blob,
-    });
-    result.then(fileInfo => {
-      if (fileInfo.fileURL) {
-        this.props.changeAction('LoginReducer/dynamicInfo/contentOss', fileInfo.fileURL);
-        this.props.form.setFieldsValue({contentOss: fileInfo.fileURL});
-        const params = this.props.dynamicInfo.toJS();
-        delete params['content'];
-        params.style = 1;
-        // this.props.dispatch(ExperienceAction.updateExperienceInfo(params));
-      } else {
-        // 上传失败的图片显示
-        console.log('上传失败');
+    if (this.props.dynamicInfo.get('id')) {
+      const param = {
+        id: this.props.dynamicInfo.get('id'),
+        img: this.props.dynamicInfo.get('img'),
+        title: params.title,
+        content: JSON.stringify(params.content)
       }
-    });
+      dispatch(LoginAction.updateDynamic(param));
+    } else {
+      const param = {
+        img: this.props.dynamicInfo.get('img'),
+        title: params.title,
+        content: JSON.stringify(params.content)
+      }
+      dispatch(LoginAction.addDynamic(param));
+    }
   }
   clearExperience() {
     this.props.changeAction('LoginReducer/dynamicInfo',
@@ -121,7 +111,7 @@ class DynamicInfo extends React.Component {
           // console.log('上传成功');
           getBase64(file, (imgURL) =>
           this.setState({headImg: imgURL}));
-          this.props.changeAction('LoginReducer/dynamicInfo/headImg', fileInfo.fileURL);
+          this.props.changeAction('LoginReducer/dynamicInfo/img', fileInfo.fileURL);
         } else {
           // 上传失败的图片显示
           console.log('上传失败');
@@ -201,7 +191,7 @@ class DynamicInfo extends React.Component {
     });
     // can use data-binding to set
     // important! notify form to detect changes
-    console.log(content);
+    // console.log(content);
     form.setFieldsValue({
       content,
     });
@@ -287,7 +277,7 @@ class DynamicInfo extends React.Component {
                         content,
                       });
                     } catch(e) {
-                      console.warn(e);
+                      // console.warn(e);
                     }
                   }
                 },
@@ -361,12 +351,8 @@ class DynamicInfo extends React.Component {
                 {...formItemLayout}
                 label="头图(750*360)"
               >
-                {getFieldDecorator('headImg', {
-                  initialValue: this.state.headImg,
-                  rules: [{
-                    required: true,
-                    message: '请上传头图',
-                  }],
+                {getFieldDecorator('img', {
+                  initialValue: this.state.img,
                   })(
                   <Upload
                     className={styles.avatarUploader}
@@ -375,8 +361,8 @@ class DynamicInfo extends React.Component {
                     beforeUpload={(file) =>this.beforeHeadImgUpload(file)}
                   >
                     {
-                      this.props.dynamicInfo.get('headImg') ?
-                        <img src={this.props.dynamicInfo.get('headImg')} alt="" className={styles.avatar} /> :
+                      this.props.dynamicInfo.get('img') ?
+                        <img src={this.props.dynamicInfo.get('img')} alt="" className={styles.avatar} /> :
                         <Icon type="plus" className={styles.avatarUploaderTrigger} />
                     }
                   </Upload>
@@ -388,6 +374,10 @@ class DynamicInfo extends React.Component {
               >
                 {getFieldDecorator('title', {
                   initialValue: this.props.dynamicInfo.get('title'),
+                  rules: [{
+                    required: true,
+                    message: '请输入标题',
+                  }],
                   onChange: (e) => {
                     this.props.changeAction(
                     'LoginReducer/dynamicInfo/title', e.target.value);

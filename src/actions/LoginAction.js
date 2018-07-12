@@ -1,5 +1,5 @@
 
-import { POSTJSON, GET } from '../core/WS/WSHandler';
+import { POSTJSON, GET, POST } from '../core/WS/WSHandler';
 import * as URL from '../core/WS/URL';
 import { push } from 'react-router-redux';
 import * as RoutingURL from '../core/RoutingURL/RoutingURL';
@@ -9,7 +9,7 @@ import NotificationCenter from '../common/NotificationCenter';
 // 登录
 export const GET_LOGIN = 'GET_LOGIN';
 export const getLOGIN = (params: Object) => (dispatch) => {
-  const result = POSTJSON(URL.LoginPath, params);
+  const result = POST(URL.LoginPath, params);
   AsyncFetchHandler(GET_LOGIN, result, dispatch);
   result.then(data => {
     console.log(data)

@@ -59,7 +59,7 @@ export const GET = async (path: string, params = {}) => {
   }
 };
 
-export const POSTJSON = async (path: string, json = {}) => {
+export const POST = async (path: string, json = {}) => {
   const RequestURL = path;
   const paramsWithToken = Object.assign({}, json);
   const body = _param(paramsWithToken);
@@ -68,6 +68,39 @@ export const POSTJSON = async (path: string, json = {}) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
+        'token': localStorage.getItem("token"),
+      },
+      body,
+      credentials: 'include',
+    });
+    if (response.status >= 500 && response.status < 600) {
+
+    }
+    const result = await response.json();
+    // 未登录
+    if (result.code === '004') {
+      dispatch(push(RoutingURL.Login()))
+    }
+    // console.log('postjson webservice result: ', result);
+    return result;
+  } catch (err) {
+    // console.log(err);
+    // console.warn(`WSHandler -> POSTJSON -> err: ${err}`);
+    return {
+      message: err,
+    };
+  }
+};
+
+export const POSTJSON = async (path: string, json = {}) => {
+  const RequestURL = path;
+  const paramsWithToken = Object.assign({}, json);
+  const body = JSON.stringify(paramsWithToken);
+  try {
+    const response = await fetch(RequestURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
         'token': localStorage.getItem("token"),
       },
       body,
@@ -148,6 +181,7 @@ export const Upload = (baseURL, params, filename, file) => new Promise((resolve,
 
 export const UploadFileToOSS = async (params = {}) => {
   let signature = await GET(URL.GetOSSSignature, params);
+  console.log('signature', signature)
   signature = signature.data;
   let localName = `${random_string(6)}-${params.filename}`;
   if(params.uploadType === 'update') {
