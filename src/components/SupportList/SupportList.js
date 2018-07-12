@@ -39,17 +39,17 @@ class SupportList extends React.Component {
           </div>*/}
           <div className={ styles.contentListTable } >
              <SupportListTable
-               dataSource={this.props.supportList.get('list')}
-               total={this.props.supportList.get('total')}
+               dataSource={this.props.supportList &&this.props.supportList.get('list')}
+               total={this.props.supportList &&this.props.supportList.get('total')}
                dispatch={this.props.dispatch}
              />
           </div>
           <div className={ styles.pageNav }>
             <PageNav
-              pageSize={this.props.searchData.get('pageSize')}
-              total={this.props.supportList.get('total')}
-              params={this.props.searchData.toJS()}
-              current={this.props.searchData.get('pageNum')}
+              pageSize={this.props.searchData ? this.props.searchData.get('pageSize') : 10}
+              total={this.props.supportList && this.props.supportList.get('total')}
+              params={this.props.searchData && this.props.searchData.toJS()}
+              current={this.props.searchData ? this.props.searchData.get('pageNum') : 1 }
               searchAction={this._searchAction(this.props.dispatch)}
             />
           </div>

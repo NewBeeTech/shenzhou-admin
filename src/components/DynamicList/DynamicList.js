@@ -14,7 +14,7 @@ import amumu from 'amumu';
 @amumu.decorators.Loading('pc')
 class DynamicList extends React.Component {
   componentWillMount() {
-    // this.props.dispatch(LoginAction.getDynamicList(this.props.searchData.toJS()));
+    this.props.dispatch(LoginAction.getDynamicList(this.props.searchData.toJS()));
   }
   _searchAction = (dispatch: Function) => (params: {}, current = 1) => {
     const localParams = Object.assign(params, { pageNum: current, pageSize: this.props.searchData.get('pageSize') });

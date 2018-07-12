@@ -12,7 +12,8 @@ export const getLOGIN = (params: Object) => (dispatch) => {
   const result = POSTJSON(URL.LoginPath, params);
   AsyncFetchHandler(GET_LOGIN, result, dispatch);
   result.then(data => {
-    if (data.code === '200') {
+    console.log(data)
+    if (data.code == '200') {
       dispatch(push(RoutingURL.App()));
     } else {
       NotificationCenter.NotificationCard(
@@ -64,7 +65,7 @@ export const getDynamicList = (params: Object) => (dispatch) => {
     // sort: 'desc'
   }
   const localParams = Object.assign(params, param);
-  const result = GET(URL.getSupportListPath, localParams);
+  const result = GET(URL.dynamicListPath, localParams);
   AsyncFetchHandler(GET_DYNAMIC_LIST, result, dispatch);
 };
 
