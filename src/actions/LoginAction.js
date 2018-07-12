@@ -137,8 +137,8 @@ export const updateDynamic = (params: Object) => (dispatch) => {
 };
 // 删除
 export const DEL_DYNAMIC = 'DEL_DYNAMIC';
-export const delDynamic = (params: Object) => (dispatch) => {
-  const result = GET(URL.delDynamicPath, { id: params.deleteId });
+export const delDynamic = (params: Object, param) => (dispatch) => {
+  const result = GET(URL.delDynamicPath, { id: params.id });
   AsyncFetchHandler(
     DEL_DYNAMIC,
     result,
@@ -152,7 +152,7 @@ export const delDynamic = (params: Object) => (dispatch) => {
         'success',
         2,
       );
-      dispatch(getDynamicList(params));
+      dispatch(getDynamicList(param));
     } else {
       NotificationCenter.NotificationCard(
         '删除失败',

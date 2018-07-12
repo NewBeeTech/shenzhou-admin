@@ -30,8 +30,8 @@ class DynamicList extends React.Component {
     dispatch(push(RoutingURL.DynamicInfo(params.get('id'), true)));
   }
   _deleteAction = (dispatch: Function) => (params: number, current = 1) => {
-    const localParams = Object.assign(params, { pageNum: current, pageSize: this.props.searchData.get('pageSize') });
-    dispatch(LoginAction.delDynamic(localParams));
+    // const localParams = Object.assign(params, { pageNum: current, pageSize: this.props.searchData.get('pageSize') });
+    dispatch(LoginAction.delDynamic(params, { pageNum: current, pageSize: this.props.searchData.get('pageSize') }));
     this.props.changeAction('LoginReducer/dynamicSearchData/pageNum', current);
   };
   render() {
