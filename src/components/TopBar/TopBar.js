@@ -10,12 +10,12 @@ import * as LoginAction from '../../actions/LoginAction';
 
 class TopBar extends React.PureComponent {
   _logoutAction = () => {
-    // this.props.dispatch(LoginAction.getLOGOUT());
+    this.props.dispatch(push('/login'));
   }
   render() {
     const _handleClick = ({ key }) => {
       if (key === '1') {
-        // this._logoutAction();
+        this._logoutAction();
       }
     };
     const menu = (
